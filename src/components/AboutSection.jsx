@@ -1,7 +1,8 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import rotatingImg from "../assets/rotatingimg.png";
-import greenRotating from "../assets/greenrotating.png";
+
+import rotatingImg from '../assets/rotatingimg.png';
+import rotatingImg2 from '../assets/greenrotatingimg.png';
 
 
 
@@ -60,7 +61,8 @@ export default function AboutSection() {
       </motion.h2>
 
       <motion.img
-        src={greenRotating} // 👈 replace with your image file
+
+        src={rotatingImg2}// 👈 replace with your image file
         alt="rotating background"
         className="about-green-image"
         animate={{ rotate: 360 }}

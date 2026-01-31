@@ -10,7 +10,7 @@
 /* load Lazy Dog from public/fonts */
 @font-face {
   font-family: "LazyDog";
-  src: url('/fonts/LazyDog.ttf') format('truetype');
+  src: url('./fonts/LazyDog.otf') format('truetype');
   font-display: swap;
 }
 
