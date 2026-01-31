@@ -4,6 +4,8 @@ import rotatingImg from "../assets/rotatingimg.png";
 import greenRotating from "../assets/greenrotating.png";
 
 
+
+
 export default function AboutSection() {
   // hook for global scroll progress (0 → 1)
   const { scrollYProgress } = useScroll();
@@ -24,6 +26,7 @@ export default function AboutSection() {
   const skillsOpacity = useTransform(scrollYProgress, [0.32, 0.6], [1, 1]);
   const skillsX = useTransform(scrollYProgress, [0.32, 0.5], ["55vw", "10vw"]);
   const skillsY = useTransform(scrollYProgress, [0.5, 0.6], ["20vw", "8vw"]);
+  
 
 
   return (
