@@ -1,0 +1,1343 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0e0a0a;
+  --white: #ffffff;
+}
+
+/* load Lazy Dog from public/fonts */
+@font-face {
+  font-family: "LazyDog";
+  src: url('/fonts/LazyDog.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* reset & base */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+}
+
+body {
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  overflow-x: hidden;
+}
+
+/* container is tall so scrolling triggers animations */
+.about-container {
+  height: 400vh;
+  /* change later to tune scroll length */
+  padding: 6vh 6vw;
+  position: relative;
+  z-index: 2;
+}
+
+/* main heading - big, sticky so it transitions in place */
+.hi-text {
+  position: sticky;
+  top: 18vh;
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(48px, 10vw, 220px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  z-index: 10;
+}
+
+/* secondary intro line */
+.brisbane-text {
+  position: sticky;
+  top: 40vh;
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+  font-size: clamp(20px, 4.5vw, 64px);
+  line-height: 1.02;
+  z-index: 10;
+}
+
+.about-me {
+  height: 110vh;
+  /* change later to tune scroll length */
+  padding: 6vh 6vw;
+  position: relative;
+  z-index: 2;
+}
+
+.about-me-text {
+  position: absolute;
+  top: 82vh;
+  left: 8vh;
+  text-align: right;
+}
+
+.about-me-text-p {
+  position: absolute;
+  top: 34vh;
+  right: 0vh;
+  width: 48vw;
+  /* 👈 takes up half the screen */
+  text-align: justify;
+  /* 👈 makes text readable */
+  padding-right: 5vw;
+  /* 👈 optional: adds breathing room from edge */
+  line-height: 1.6;
+}
+
+.about-me-text-p p {
+  font-size: 2.5vh;
+  /* adjust to match your design */
+  font-weight: 600;
+  color: white;
+  /* or your theme color */
+  max-width: 100%;
+}
+
+.about-me-text-abt {
+  position: sticky;
+  margin: 0;
+  font-weight: 600;
+  font-size: 25vh;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.about-me-text-me {
+  font-family: "LazyDog", cursive;
+  position: absolute;
+  left: 28vw;
+  font-weight: 500;
+  font-size: 13vh;
+  line-height: 0;
+  letter-spacing: -0.02em;
+}
+
+/* skills box */
+.skills {
+  position: sticky;
+  top: 62vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: flex-end;
+  font-size: clamp(16px, 3.5vw, 48px);
+  font-weight: 600;
+}
+
+.skills p {
+  position: sticky;
+  margin: 0.8rem 0;
+  padding-bottom: 0.4rem;
+  /* space above the line */
+}
+
+.skills p::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 150%;
+  height: 1px;
+  /* thickness of the line */
+  background-color: white;
+  /* or your accent color */
+  opacity: 0.6;
+  transition: width 0.4s ease;
+}
+
+/* lazy dog caps & style overrides */
+.lazy-dog {
+  font-family: "LazyDog", cursive;
+  font-weight: 700;
+  text-transform: none;
+}
+
+/* small tweak class for uppercase look */
+.lazy-dog.caps {
+  letter-spacing: 0.04em;
+}
+
+/* paragraph styles (skills) */
+.skills p {
+  margin: 0;
+  padding-right: 3rem;
+  /* spacing from right side */
+}
+
+/* simple responsive padding so it looks like screenshots on large displays */
+@media (min-width: 1200px) {
+  .about-container {
+    padding-left: 8vw;
+    padding-right: 8vw;
+  }
+
+  .skills {
+    padding-right: 10vw;
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  z-index: 1000;
+  /* default text color for links; children SHOULD inherit this */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* anchor wrapper - give a decent hit area and transition */
+.navbar a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: -14px;
+  gap: 0.12rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .9s ease, color .9s ease, transform .9s ease;
+  color: inherit;
+  /* IMPORTANT: ensure children inherit anchor color */
+}
+
+/* number (smaller) and label (main) inherit color from the anchor */
+.navbar a .num {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: lowercase;
+  /* matches your design */
+  color: inherit;
+}
+
+/* hover - both num and label inherit this color */
+.navbar a:hover,
+.navbar a:focus {
+  transform: translateY(-2px);
+  font-weight: bold;
+  background: rgb(212, 132, 234);
+  color: #000;
+  border-radius: 20px;
+}
+
+/* active - white background + black text */
+.navbar a.active {
+  background: white;
+  color: #000;
+  font-weight: bold;
+  transform: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* WHEN NAVBAR IS IN LIGHT MODE → invert the active colors */
+.navbar-light a.active {
+  background: #000 !important;
+  /* black background */
+  color: #fff !important;
+  /* white text */
+  box-shadow: none;
+}
+
+/* ensure children still inherit when active */
+.navbar a.active .num {
+  border-radius: 20px;
+  font-weight: bold;
+  transform: none;
+}
+
+/* small responsive tweak */
+@media (max-width: 640px) {
+  .navbar {
+    gap: 1.2rem;
+    font-size: 0.9rem;
+    top: 14px;
+  }
+
+  .navbar a {
+    padding: 0.2rem 0.45rem;
+  }
+}
+
+/* TIME + LOCATION */
+.time-location {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 1000;
+}
+
+.time-location .location {
+  font-size: 1.2rem;
+}
+
+.time-location .time {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.logowhite {
+  height: 60px;
+  position: fixed;
+  top: 35px;
+  left: 45px;
+  z-index: 100;
+}
+
+.logoblack {
+  filter: invert(1);
+  height: 60px;
+  margin-top: 12px;
+  margin-left: 12px;
+  position: fixed;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  pointer-events: none;
+  /* so it doesn’t block clicks */
+  z-index: 9999;
+
+  /* This makes the cursor act like a contrast mask */
+  background-color: white;
+  mix-blend-mode: difference;
+
+  /* Smooth transitions for scaling */
+  transition: transform 0.9s ease;
+}
+
+
+
+/* 🌸 rotating background image */
+.about-bg-image {
+  position: sticky;
+  top: 20%;
+  left: 93%;
+  margin-bottom: -4%;
+  width: 100vw;
+  /* adjust for size */
+  max-width: 250px;
+  z-index: 0;
+  /* behind all text */
+  pointer-events: none;
+  /* so you can still interact with text */
+}
+
+.about-green-image {
+  position: absolute;
+  bottom: -12%;
+  left: 0%;
+  margin-bottom: -4%;
+  width: 100vw;
+  /* adjust for size */
+  max-width: 300px;
+  z-index: 0;
+  /* behind all text */
+  pointer-events: none;
+  /* so you can still interact with text */
+}
+
+
+
+
+.resume-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 6vh 4vw;
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.resume-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 10vw;
+}
+
+.resume-left {
+  margin-top: 22%;
+}
+
+
+.resume-right {
+  margin-left: 22%;
+  margin-top: 7%;
+}
+
+/* HEADINGS */
+.resume-heading-skills {
+  font-size: 7.5vw;
+  font-weight: 700;
+  line-height: 0.9;
+  margin-top: 3vh;
+  text-transform: lowercase;
+}
+
+.resume-heading-awards {
+  font-size: 7.5vw;
+  font-weight: 700;
+  line-height: 0.6;
+  margin-bottom: 4vh;
+  margin-left: -2%;
+  text-transform: lowercase;
+}
+
+/* ========================= */
+/*          SKILLS           */
+/* ========================= */
+
+.skill-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.1rem 0;
+  border-bottom: 1px solid #fff;
+  gap: 1vw;
+}
+
+.skill-title {
+  width: 30%;
+  font-family: "LazyDog", cursive;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.skill-desc {
+  width: 50%;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  margin-right: 10%;
+}
+
+/* ========================= */
+/*          AWARDS           */
+/* ========================= */
+
+.award-block {
+  margin: 0rem;
+}
+
+.award-title {
+  font-family: "LazyDog", cursive;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 0rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.award-sub {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.award-desc {
+  font-size: 1.1rem;
+  line-height: 1.25;
+  max-width: 90%;
+}
+
+.award-divider {
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  margin: 1.5rem 0;
+}
+
+/* ========================= */
+/*     DOWNLOAD BUTTON       */
+/* ========================= */
+
+.resume-download {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 2.5rem;
+  font-weight: 550;
+  cursor: pointer;
+  text-decoration: underline 4px;
+  color: #fff;
+  white-space: nowrap;
+  margin-top: 6rem;
+}
+
+.download-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+
+/* =============================== */
+/*          CONTACT PAGE           */
+/* =============================== */
+
+.contact-section {
+  background: #ffffff;
+  color: #000;
+  width: 100%;
+  min-height: 100vh;
+  padding: 12vh 6vw 0vh 6vw;
+  position: relative;
+}
+
+.contact-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 18vh;
+}
+
+/* LEFT SIDE TEXT */
+.contact-left {
+  max-width: 45%;
+}
+
+.contact-intro {
+  font-family: "LazyDog", cursive;
+  font-size: 1.6vw;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
+/* RIGHT SIDE TEXT */
+.contact-right {
+  text-align: left;
+  max-width: 40%;
+  margin-top: 2%;
+}
+
+.head-box {
+  display: flex;
+  gap: 2rem;
+}
+
+.email-me {
+  font-family: "LazyDog", cursive;
+  font-size: 1.6vw;
+  margin: 0;
+  font-weight: 100;
+  margin-left: -20vw;
+  display: flex;
+
+}
+
+.contact-email {
+  font-size: 1.3vw;
+  margin: 0;
+  font-weight: 550;
+  display: flex;
+
+}
+
+/* ICON ROW */
+.contact-icons {
+  display: flex;
+  gap: 0.8rem;
+  margin: 0.5rem 10rem 0.5rem -18rem;
+  justify-content: left;
+}
+
+.icon-box {
+  width: 40px;
+  height: 35px;
+  border: 2px solid black;
+  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.behance-box {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+/* DIVIDER */
+.contact-divider {
+  width: 400%;
+  height: 1px;
+  background: #000;
+  margin-top: 0.1rem;
+  margin-left: -20vw;
+}
+
+/* HUGE CONNECT TEXT */
+.contact-bottom {
+  margin-top: 20vh;
+  text-align: left;
+}
+
+.connect-lets {
+  font-family: "LazyDog", cursive;
+  font-size: 4vw;
+  font-weight: 500;
+  margin-bottom: -10vh;
+}
+
+.connect-main {
+  font-size: 23vw;
+  font-weight: 600;
+  line-height: 0.8;
+  margin-top: 3vh;
+  margin-left: -5vw;
+}
+
+
+
+.navbar-light {
+  color: #000 !important;
+}
+
+.navbar-light a {
+  color: #000 !important;
+}
+
+.navbar-light a:hover {
+  background: rgb(212, 132, 234);
+  color: #fff;
+}
+
+.logo-light-mode {
+  filter: invert(1);
+  /* turns white → black */
+}
+
+
+
+.time-location-light {
+  color: #000 !important;
+}
+
+.time-location-light .time,
+.time-location-light .location {
+  color: #000 !important;
+}
+
+.time-location,
+.navbar,
+.logowhite,
+.logoblack {
+  transition: color 240ms ease, opacity 240ms ease, filter 240ms ease;
+}
+
+.ui-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  /* adjust based on spacing */
+  background: rgba(14, 10, 10, 0.01);
+  /* default: dark */
+  backdrop-filter: blur(30px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4vw;
+  transition: background 0.5s ease, color 0.5s ease, filter 0.4s ease;
+}
+
+/* WHITE MODE (on Contact section) */
+.ui-strip-light {
+  background: rgb(255, 255, 255, 0.01);
+}
+
+.ui-strip>* {
+  animation: slideFadeDown 0.5s ease forwards;
+  opacity: 0.5;
+  transform: translateY(-18px);
+}
+
+@keyframes slideFadeDown {
+  to {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+}
+
+.ui-strip::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  /* distance fade extends downward */
+  left: 0;
+  width: 100%;
+  height: 90px;
+
+  /* ✨ THE MAGIC: GRADIENT FADE */
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.08) 70%,
+      rgba(255, 255, 255, 0.01) 100%);
+
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.ui-strip:not(.ui-strip-light)::after {
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.1) 40%,
+      rgba(0, 0, 0, 0.08) 70%,
+      rgba(0, 0, 0, 0.01) 100%);
+}
+
+/* WORK SECTION */
+.work-section {
+  background: #ffffff;
+  color: #000;
+  width: 100%;
+  min-height: 90vh;
+  padding: 12vh 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.work-heading {
+  line-height: 0.9;
+  text-align: center;
+  position: sticky;
+  top: 20%;
+  right: 50%;
+  left: 50%;
+  margin-bottom: -35%;
+}
+
+.work-heading h1 {
+  font-size: 9vw;
+  font-weight: 700;
+  margin-top: 0%;
+  color: #3b3b3b;
+  text-transform: uppercase;
+  letter-spacing: -0.1vw;
+}
+
+.work-heading h2 {
+  font-size: 4vw;
+  font-weight: 300;
+  margin-bottom: -1%;
+  font-family: "LazyDog", cursive;
+  color: #3b3b3b;
+}
+
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+
+/* ===== HARMONY LINKS ===== */
+
+.harmony-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  padding: 6rem 0 4rem 17rem;
+  text-align: left;
+  max-width: 1200px;
+}
+
+.harmony-link p {
+  font-size: 1.7rem;
+  font-family: "LazyDog";
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+  color: white;
+
+}
+
+.harmony-link a {
+  font-size: 2rem;
+  text-decoration: underline;
+  font-weight: 600;
+  color: white;
+  transition: opacity 0.25s ease;
+}
+
+.harmony-link a:hover {
+  opacity: 0.9;
+  color: #d685ff;
+}
+
+/* ===== OTHER PROJECTS ===== */
+
+.harmony-other {
+  padding: 4rem 4rem 8rem 13rem;
+  max-width: 1300px;
+}
+
+.harmony-other h2 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.harmony-projects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+}
+
+.harmony-project-card {
+  display: block;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.harmony-project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transition: transform 0.6s ease;
+}
+
+.harmony-project-card:hover img {
+  transform: scale(1.06);
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .harmony-links {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 4rem 2rem;
+  }
+
+  .harmony-other {
+    padding: 3rem 2rem 6rem;
+  }
+
+  .harmony-projects {
+    grid-template-columns: 1fr;
+  }
+
+  .harmony-other h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.harmony-gallery {
+  padding-top: 4rem;
+
+}
+
+.harmony-gallery img {
+  padding-top: 6rem;
+
+}
+
+/* --- Reveal animation --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+/* Small rectangle tab */
+.info-tab {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 12px 10px;
+  background: #fff;
+  color: #000;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  border: none;
+}
+
+/* Panel shell */
+.info-panel {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translate(100%, -50%);
+  width: 380px;
+  height: 80vh;
+  background: white;
+  border-radius: 20px 0 0 20px;
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.25);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+/* When open */
+.info-panel.open {
+  transform: translate(0, -50%);
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #d685ff;
+}
+
+/* Content scrolls, panel stays fixed */
+.info-content {
+  padding: 40px;
+  overflow-y: auto;
+  color: #000;
+}
+
+.info-content h2 {
+  margin-top: 1.5rem;
+  font-size: 19px;
+  margin-bottom: 0;
+  font-family: 'LazyDog', cursive;
+}
+
+.info-content h3 {
+  font-size: 15.5px;
+  margin-bottom: -0.6rem;
+  margin-top: 0.2rem;
+}
+
+.info-content p {
+  font-size: 14.5px;
+  text-align: justify;
+  line-height: 17px;
+  font-weight: 500;
+}
+
+.info-content h4 {
+  font-size: 15px;
+  text-align: left;
+  font-weight: 500;
+  color: #d685ff;
+
+
+}
+
+.info-panel.open+.info-tab {
+  display: none;
+}
+
+
+.info-tab-img {
+  width: 35px;
+  height: auto;
+  display: block;
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.info-tab-img:hover {
+  filter: brightness(2) saturate(60%) invert(36%) sepia(64%) saturate(2400%) hue-rotate(245deg) brightness(95%) contrast(95%);
+  transform: translateX(-4px);
+  border-radius: 30px;
+}
+
+
+.back-button {
+  position: fixed;
+  top: 5rem;
+  left: 4rem;
+  z-index: 30;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.back-button-img {
+  width: 59px;
+  height: auto;
+  display: block;
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+/* purple hover */
+.back-button:hover .back-button-img {
+  filter: brightness(2) saturate(60%) invert(36%) sepia(64%) saturate(2400%) hue-rotate(245deg) brightness(95%) contrast(95%);
+  transform: translateX(-4px);
+  border-radius: 30px;
+
+}
+
+
+.heartbreak-gallery {
+  padding-top: 0rem;
+  max-width: 1400px;
+  margin-left: 3%;
+}
+
+.heartbreak-gallery img {
+  padding-top: 5rem;
+}
+
+.heartbreak-gallery video {
+  padding-top: 7rem;
+  max-width: 1100px;
+  margin-left: 11%;
+
+}
+
+.heartbreak-link p {
+  font-size: 1.7rem;
+  font-family: "LazyDog";
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+  color: white;
+
+}
+
+.heartbreak-link a {
+  font-size: 2rem;
+  text-decoration: underline;
+  font-weight: 600;
+  color: white;
+  transition: opacity 0.25s ease;
+}
+
+.heartbreak-link a:hover {
+  opacity: 0.9;
+  color: #d685ff;
+}
+
+.heartbreak-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0rem;
+  padding: 9rem 0 4rem 24rem;
+  text-align: left;
+  max-width: 1300px;
+}
+
+
+.volcano-links {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0rem;
+  padding: 9rem 0 4rem 37rem;
+  text-align: left;
+  max-width: 1300px;
+}
+
+
+/* ============================= */
+/*     BILLBOARD LIGHT MODE      */
+/* ============================= */
+
+.billboard-light {
+  background: #ffffff;
+  color: #000;
+}
+
+/* INFO PANEL */
+.billboard-light .info-panel {
+  background: #000;
+  /* black panel */
+  color: #fff;
+  /* white text */
+}
+
+.billboard-light .info-panel h2,
+.billboard-light .info-panel h3,
+.billboard-light .info-panel p {
+  color: #fff;
+}
+
+.billboard-light .info-panel h4 {
+  color: #d685ff;
+  /* purple accent */
+}
+
+
+.billboard-light .back-button-img {
+  filter: invert(1);
+  /* makes the tab black on white page */
+
+}
+
+/* INFO TAB BUTTON */
+.billboard-light .info-tab-img {
+  filter: invert(1);
+  /* makes the tab black on white page */
+}
+
+.billboard-light .info-tab-img:hover {
+  filter: brightness(2) saturate(60%) invert(36%) sepia(64%) saturate(2400%) hue-rotate(245deg) brightness(95%) contrast(95%);
+  transform: translateX(-4px);
+  border-radius: 30px;
+}
+
+/* LINKS SECTION */
+.billboard-light .harmony-links {
+  background: #fff;
+}
+
+.billboard-light .harmony-link p,
+.billboard-light .harmony-link a {
+  color: #000;
+}
+
+.billboard-light .harmony-link a:hover {
+  color: #d685ff;
+  /* your purple accent */
+}
+
+/* OTHER PROJECTS */
+.billboard-light .harmony-other h2 {
+  color: #000;
+}
+
+.billboard-light .harmony-gallery img {
+  padding-bottom: 13%;
+  margin-top: -9%;
+}
+
+.billboard-light .harmony-gallery video {
+  padding-bottom: 13%;
+  margin-top: -5%;
+}
+
+.billboard-light .harmony-gallery .top-image img {
+  margin-top: -3%;
+}
+
+.billboard-light .harmony-gallery .wider-images img {
+  padding-bottom: 0%;
+  margin-top: -13%;
+  margin-left: 10%;
+  max-width: 1200px;
+}
+
+.billboard-light .harmony-gallery .wider-images video {
+  margin-top: -5%;
+  margin-left: 10%;
+  margin-bottom: -7%;
+  max-width: 1200px;
+}
+
+.billboard-light .harmony-gallery .wider-images .last-img img {
+  margin-top: -9%;
+}
+
+.billboard-light .heartbreak-links {
+  background: #fff;
+}
+
+.billboard-light .heartbreak-link p,
+.billboard-light .heartbreak-link a {
+  color: #000;
+}
+
+.billboard-light .heartbreak-link a:hover {
+  color: #d685ff;
+  /* your purple accent */
+}
+
+.zine-gallery {
+  padding-top: 0rem;
+
+}
+
+.zine-gallery img {
+  padding-top: 6rem;
+
+}
+
+.avant-zine {
+  width: 100%;
+  max-width: 1200px;
+  margin: 8rem auto;
+  margin-bottom: 0;
+}
+
+.pepper-gallery {
+  padding-top: 6rem;
+
+}
+
+.pepper-gallery .pepper-hero img {
+  max-width: 1000px;
+  margin-left: 16%;
+  border-radius: 20px;
+
+}
+
+.pepper-gallery .ig-grid img {
+  margin-left: 5%;
+  margin-top: 5%;
+  max-width: 1350px;
+}
+
+.pepper-gallery .ig-plates img {
+  margin-left: 3.5%;
+  margin-top: 8%;
+  max-width: 1350px;
+}
+
+.pepper-gallery .zoom-grid img {
+  margin-left: 4.5%;
+  margin-top: 12%;
+  max-width: 1350px;
+}
+
+.pepper-gallery .stories video {
+  margin-left: 6%;
+  margin-top: 12%;
+  max-width: 1325px;
+}
+
+.pepper-gallery .mockup img {
+  margin-left: 6%;
+  margin-top: 12%;
+  max-width: 1325px;
+}
+
+.pepper-gallery .emails img {
+  margin-left: 23%;
+  margin-top: 12%;
+  max-width: 800px;
+}
+
+.flowcus-gallery {
+  padding-top: 5rem;
+}
+
+.flowcus-gallery .zero img {
+  padding-bottom: 18rem;
+}
+
+
+.flowcus-gallery .one-two img {
+  margin-top: -1%;
+}
+
+.flowcus-gallery .last video {
+  max-width: 1100px;
+  margin-left: 12%;
+  margin-top: 15%;
+  margin-bottom: 5%;
+}
+
+.wecoll-gallery {
+  padding-top: 0rem;
+}
+
+.video-container{
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  margin-top: -3rem;
+}
+
+.video-container h2 {
+  color: white;
+  font-size: 2rem;
+  font-family: 'LazyDog';
+  margin-left: 12%;
+  margin-bottom: 0;
+  font-weight: 100;
+
+}
+
+.video-container h3 {
+  color: white;
+  font-size: 1.7rem;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  margin-top: 0;
+  margin-left: 12%;
+}
+
+.wecoll2-gallery {
+  padding-top: 0rem;
+}
+
+.wecoll2-gallery img, video {
+  padding-bottom: 11rem;
+}
+
+.wecoll2-gallery .six-seven img {
+margin-bottom: -5%;}
+
+.wecoll2-gallery h2 {
+  color: white;
+  font-size: 2rem;
+  font-family: 'LazyDog';
+  margin-left: 18%;
+  margin-bottom: 11rem;
+  font-weight: 100;
+  margin-top: -11%;
+
+}
+
+.wecoll2-gallery h3 {
+  color: white;
+  font-size: 1.7rem;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  margin-top: 0;
+  margin-left: 17%;
+}
