@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @font-face {
   font-family: "LazyDog";
-  src: url('/fonts/LazyDog.ttf') format('truetype');
+  src: url('/fonts/LazyDog.otf') format('truetype');
   font-display: swap;
 }
 
