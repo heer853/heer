@@ -1,5 +1,8 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import rotatingImg from "../assets/rotatingimg.png";
+import greenRotating from "../assets/greenrotating.png";
+
 
 export default function AboutSection() {
   // hook for global scroll progress (0 → 1)
@@ -27,7 +30,7 @@ export default function AboutSection() {
     <section id="about" className="about-container">
 
 <motion.img
-        src="src/assets/rotatingimg.png" // 👈 replace with your image file
+        src={rotatingImg} // 👈 replace with your image file
         alt="rotating background"
         className="about-bg-image"
         animate={{ rotate: 360 }}
@@ -54,7 +57,7 @@ export default function AboutSection() {
       </motion.h2>
 
       <motion.img
-        src="src/assets/greenrotating.png" // 👈 replace with your image file
+        src={greenRotating} // 👈 replace with your image file
         alt="rotating background"
         className="about-green-image"
         animate={{ rotate: 360 }}
