@@ -2,7 +2,7 @@ import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import rotatingImg from '../assets/rotatingimg.png';
-import rotatingImg2 from '../assets/greenrotatingimg.png';
+import rotatingImg2 from '../assets/greenrotating.png';
 
 
 
