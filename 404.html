@@ -1,17 +1,12 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Heer — Portfolio</title>
+    <script>
+      const path = window.location.pathname;
+      const repo = "/heer";
 
-    <!-- Montserrat from Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/heer/assets/index-Dy_4itbu.js"></script>
-    <link rel="stylesheet" crossorigin href="/heer/assets/index-EQz6qYso.css">
+      window.location.replace(repo + "/#" + path.replace(repo, ""));
+    </script>
   </head>
-  <body>
-    <div id="root"></div>
-  </body>
 </html>
